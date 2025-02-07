@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 interface AssetCardProps {
   asset: {
@@ -26,8 +27,13 @@ const getStatusColor = (status: string) => {
 };
 
 const AssetCard = ({ asset }: AssetCardProps) => {
+  const navigate = useNavigate();
+
   return (
-    <Card className="hover:shadow-lg transition-shadow">
+    <Card 
+      className="hover:shadow-lg transition-shadow cursor-pointer" 
+      onClick={() => navigate(`/asset/${asset.id}`)}
+    >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-lg font-bold">{asset.name}</CardTitle>
         <Badge className={`${getStatusColor(asset.status)} text-white`}>
